@@ -1,24 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Link from "next/link"
-import {
-  NavigationMenu,
-  //NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  //NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
 import { ThemeProvider } from "@/components/theme-provider"
-import { ModeToggle } from "@/components/mode-toggle";
+import { MyNavigationMenu } from "@/components/my-navigation-menu";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -46,41 +37,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <div className="flex justify-center">
-              <NavigationMenu>
-                  <NavigationMenuList>
-
-                      <NavigationMenuItem>
-                      <Link href="/" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                          Home
-                          </NavigationMenuLink>
-                      </Link>
-                      </NavigationMenuItem>
-
-                      <NavigationMenuItem>
-                      <Link href="/quiz" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                          Quiz
-                          </NavigationMenuLink>
-                      </Link>
-                      </NavigationMenuItem>
-
-                      <NavigationMenuItem>
-                      <Link href="/about-me" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                          About Me
-                          </NavigationMenuLink>
-                      </Link>
-                      </NavigationMenuItem>
-
-                      <ModeToggle />
-
-                  </NavigationMenuList>
-              </NavigationMenu>
-          </div>
-
-        {children}
+          <MyNavigationMenu />
+          {children}
         </ThemeProvider>
       </body>
     </html>
