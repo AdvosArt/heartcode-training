@@ -2,79 +2,72 @@
 
 import React,{useState} from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { Progress } from "@/components/ui/progress"
-import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 
-import { Button } from '@/components/ui/button';
-import { FaCheckCircle,FaTimesCircle } from "react-icons/fa";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { number, z } from "zod"
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 
-const Question = (props:any) => {
-  const [answer,setAnswer] = useState('');
-  const [submitted,setSubmitted] = useState(false);
-  const submitAnswer = () => {
-      setSubmitted(true);
-  }
-  const nextQuestion = () => {
-      props.save(answer == props.data.answer)
-  }
-  const checkAnswer = (val:string) => {
-      if(val == answer && val == props.data.answer){
-          return true;
-      }
-      if(val == answer && val != props.data.answer){
-          return false;
-      }
-      if(val != answer && val == props.data.answer){
-      return true;
-      }
-  }
-  return (
-      <div className='flex flex-col'>
-          <Label className='text-2xl mb-4' htmlFor="">{props.data.text}</Label>
-          {props.data.options.map((x:any,i:any) => {
-              return <div key={i} className={`${answer == x ? 'border-[#aaa]' : ''} border px-2 py-2 mt-1 mb-1 rounded flex justify-between items-center cursor-pointer`} 
-              onClick={()=> submitted ? '' : setAnswer(x)}>
-                  <span>{x}</span>
-                  {submitted && checkAnswer(x) == true && <FaCheckCircle size={20} color='#0cde0c'></FaCheckCircle>} 
-                  {submitted && checkAnswer(x) == false && <FaTimesCircle size={20} color='#de3c3c'></FaTimesCircle>}
-              </div>
-          })}
-          <Separator className="my-2" />
-          {submitted ? <Button className='mt-1' onClick={()=>nextQuestion()}>Next</Button> : <Button className='mt-1' onClick={()=>submitAnswer()}>Submit</Button>}
-      </div>
-  );
-}
+const FormSchema = z.object({
+  answer: z.enum(["1", "2", "3", "4"], {
+    required_error: "Please select an answer.",
+  }),
+})
 
 
 export default function Home() {
-  const [question,setQuestion] = useState(1);
-  const [answers,setAnswers] = useState([]);
-  const [quizdone,setQuizdone] = useState(false);
-  const [score,setScore] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [score, setScore] = useState(0)
+  const [question, setQuestion] = useState(1)
+  const [quizDone, setQuizDone] = useState(false)
+  const [currentAnswer, setCurrentAnswer] = useState('')
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  })
   const quiz = [
-      {text:'What is openAI 1 ?',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'Opt 2'},
-      {text:'What is openAI 2 ?',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'Opt 3'},
-      {text:'What is openAI 3 ?',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'Opt 4'},
-      {text:'What is openAI 4 ?',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'Opt 1'},
+    {text:'Qn1',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'2'},
+    {text:'Qn2',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'3'},
+    {text:'Qn3',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'4'},
+    {text:'Qn4',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'1'},
   ];
-  const saveAnswer = (e:any,q:any) => {
-      let newAnswers:any = answers;
-      newAnswers.push({
-          question:q,answer:e
-      });
-      setAnswers(newAnswers);
-      if(e){setScore(score + 1)}
-      if(question < quiz.length){
-          setQuestion(question + 1);
-      }
-      if(question == quiz.length){
-          setQuizdone(true);
-      }
+
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    setIsSubmitted(true)
+    if(data["answer"] == currentAnswer) {
+      console.log(data["answer"]);
+      setIsCorrect(true);
+      setScore(score + 1)
+    }
   }
+
+  function setAnswer(x: any) {
+    setCurrentAnswer(x['answer'])
+  }
+
+  function nextQuestion() {
+    setQuestion(question + 1)
+    setIsCorrect(false)
+    setIsSubmitted(false)
+
+    if(question == quiz.length) {
+      setQuizDone(true)
+    }
+  }
+
 
   return (
     <div className="ml-auto mr-auto w-4/5">
@@ -86,68 +79,127 @@ export default function Home() {
         <CardContent>
 
         <div className="ml-auto mr-auto w-3/5">
+        {!quizDone && quiz.map((x, i) => {
+              if((i + 1) == question){
+                return (
+                  
           <Card>
             <CardHeader>
-              <CardTitle>Question 1:</CardTitle>
+              <CardTitle>Question {question}:</CardTitle>
             </CardHeader>
 
             <CardContent>
-              <div className="flex mb-5">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, quis.
-              </div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                  <FormField
+                  control={form.control}
+                  name="answer"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormLabel>
+                        {x["text"]}
+                      </FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1"
+                        >
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="1" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {x["options"][0]}
+                            </FormLabel>
+                          </FormItem>
 
-              <div className="flex ml-10">
-                <RadioGroup defaultValue="option-one">
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-one" id="option-one" />
-                    <Label htmlFor="option-one">Option One</Label>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="2" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {x["options"][1]}
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="3" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                             {x["options"][2]}
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="4" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                             {x["options"][3]}
+                            </FormLabel>
+                          </FormItem>
+
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                  
+                  />
+                  <div className='flex justify-center'>
+                    {isSubmitted ? <Button onClick={()=>nextQuestion()}>Next</Button>:<Button onClick={() => setAnswer(x)}>Submit</Button>}
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="option-two" id="option-two" />
-                    <Label htmlFor="option-two">Option Two</Label>
-                  </div>
-                </RadioGroup>
-              </div>
+                </form>
+              </Form>
+
+
+              {(isSubmitted && isCorrect) && 
+                <Alert>
+                  <AlertTitle>Correct</AlertTitle>
+                </Alert>
+              }
+
+              {(isSubmitted && !isCorrect) && 
+                <Alert>
+                  <AlertTitle>Wrong</AlertTitle>
+                </Alert>
+              }
 
             </CardContent>
           </Card>
+            )}
+          })}
+
+          
+          {quizDone && 
+            <Card>
+              <CardHeader>
+                <CardTitle>You scored {score}/{quiz.length}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {score==quiz.length && 
+                <div>
+                  Full Marks!
+                </div>
+                }
+
+              {score < quiz.length && score != 0 && 
+                <div>
+                  Nice Try!
+                </div>
+                }
+
+              {score==0 && 
+                <div>
+                  Do better.
+                </div>
+                }
+              </CardContent>
+            </Card>
+          }
           </div>
-
-          <div className="ml-auto mr-auto w-4/5">
-          <Card>
-            <CardHeader>
-                {!quizdone && <div>
-                <Progress className='h-[2px] mb-5 opacity-50' value={question * 100 / quiz.length} />
-                <CardTitle>Question {question} / {quiz.length}</CardTitle>
-                </div>}
-            </CardHeader>
-
-            <CardContent>
-              <div className='w-[400px]'>
-
-                  {!quizdone && quiz.map((x,i) => {
-                      if((i + 1) == question){
-                          return <Question key={i} data={x} save={(e:any)=>saveAnswer(e,(i+1))}></Question>
-                      }
-                  })}
-
-                  {quizdone && <div className='flex flex-col items-center'>
-                      <Label className='text-3xl'>Quiz Result</Label>
-                      <Separator className="my-2" />
-                      <span className='text-2xl'>{score}/{quiz.length} Questions are correct !</span>
-                      
-                      
-                      <span className='text-2xl'> You got {score * 100} Points</span>
-                      
-                  </div>
-
-                  }
-
-              </div>
-            </CardContent>
-          </Card>
-          </div>
-
         </CardContent>
       </Card>
 
