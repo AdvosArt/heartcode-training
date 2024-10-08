@@ -3,8 +3,8 @@
 export default function Home() {
   return (
     <div>
-      <h1>Drug Abuse</h1>
-
+      <h1>Quiz:
+      </h1>
     </div>
   );
 }
