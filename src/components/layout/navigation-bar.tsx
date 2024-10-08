@@ -54,35 +54,37 @@ import {
 
 export function NavigationBar() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
+    <div className="flex justify-center">
+        <NavigationMenu>
+        <NavigationMenuList>
 
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+            <NavigationMenuItem>
+            <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Home
+                </NavigationMenuLink>
+            </Link>
+            </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <Link href="/about-me" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              About Me
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+            <NavigationMenuItem>
+            <Link href="/quiz" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Quiz
+                </NavigationMenuLink>
+            </Link>
+            </NavigationMenuItem>
 
-        <NavigationMenuItem>
-          <Link href="/quiz" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Quiz
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+            <NavigationMenuItem>
+            <Link href="/about-me" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                About Me
+                </NavigationMenuLink>
+            </Link>
+            </NavigationMenuItem>
 
-      </NavigationMenuList>
-    </NavigationMenu>
+        </NavigationMenuList>
+        </NavigationMenu>
+    </div>
   )
 }
 
