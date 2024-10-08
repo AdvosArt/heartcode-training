@@ -1,13 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 export default function Home() {
   return (
@@ -26,7 +17,7 @@ export default function Home() {
 
         <CardContent>
           <div className="w-[400px]">
-            
+
           </div>
         </CardContent>
       </Card>
