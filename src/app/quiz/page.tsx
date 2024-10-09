@@ -17,7 +17,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Alert, AlertTitle } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
@@ -49,16 +49,16 @@ export default function Home() {
   //   {text:'Qn4',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'1'},
   // ];
   const quiz = [
-    {text:'Which one of these is NOT a commonly used recrational drug?',options:['Methamphetamine','Ketamine','Fentanyl','Paracetamol',],answer:'4'},
-    {text:'For how long can cocaine be detected in a standard urine test?',options:['1 week','1 month','4 to 5 days','27 days'],answer:'3'},
-    {text:"Once you start injecting drugs it's impossible to stop using drugs.",options:['True', 'False'],answer:'2'},
-    {text:'Which of the following is NOT a long term effect from cannabis?',options:['Feeling permanently relaxed','Reduced Motivation','Frequent illness','Change in hormones'],answer:'1'},
-    {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Up to 10 years imprisonment', 'S$20,000 fine', 'All of the above'],answer:'3'},
-    {text:'Heroin is made from the poppy plant.',options:['True', 'False'],answer:'1'},
-    {text:'Death from ecstasy (MDMA) use can be caused by the body overheating and by dehydration.',options:['True','False'],answer:'1'},
-    {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Whatsapp', 'Wechat', 'Telegram' ,"Discord"],answer:'3'},
-    {text:'Drinking black coffee does not help a person sober up after drinking alcohol.',options:['True','False'],answer:'1'},
-    {text:'Users of this drug use a pacifier after taking it to keep them from grinding their teeth.',options:['Heroin','MDMA','Meth','All of the above'],answer:'2'},
+    {text:'Which one of these is NOT a commonly used recrational drug?',options:['Methamphetamine','Ketamine','Fentanyl','Paracetamol',],answer:'4', explanation: 'Paracetamol is a common pailkiller drug. While still dangerous to overdose on, it is not a common recreational drug.'},
+    {text:'For how long can cocaine be detected in a standard urine test?',options:['48 hours','27 days','4 to 5 days','90 days'],answer:'3', explanation: 'Cocaine stays in urine for up to 4 to 5 days, in Blood and Saliva for up to 48 hours, and in hair follicles for up to 90 days.'},
+    {text:"Once you start injecting drugs it's impossible to stop using drugs.",options:['True', 'False'],answer:'2', explanation: 'While difficult, it is possible to stop taking drugs with enough help like rehabilitaion and therapy.'},
+    {text:'Which of the following is NOT a long term effect from cannabis?',options:['Feeling permanently relaxed','Reduced Motivation','Frequent illness','Change in hormones'],answer:'1', explanation: 'Long term cannabis use can affect motivation, hormones and general health but does not cause a permanent feeling of relaxation.'},
+    {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Up to 10 years imprisonment', 'S$20,000 fine', 'All of the above'],answer:'3', explanation: 'Penalties for the possesion or consumption of drugs of any kind in Singapore are up to 10 years imprisonment and a S$20,000 fine.'},
+    {text:'Heroin is made from the poppy plant.',options:['True', 'False'],answer:'1', explanation: 'The poppy plant, Papaver somniferum, produces opium, a powerful narcotic whose derivatives include morphine, codeine, heroin, and oxycodone.'},
+    {text:'Death from ecstasy (MDMA) use can be caused by the body overheating and by dehydration.',options:['True','False'],answer:'1', explanation: 'Symptoms of Ecstacy Overdose include abnormal heart rates, body temperature dysregulation, hyperthermia, and seizures.'},
+    {text:'The most common channel of communication for drug dealers online is:',options:['Whatsapp', 'Wechat', 'Telegram' ,"Discord"],answer:'3', explanation: 'Telegram is known for its two layers of secure encryption, so it is the go-to choice for drug dealers.'},
+    {text:'Alcohol is a central nervous system depressant and slows down messages to and from the brain.',options:['True','False'],answer:'1', explanation: 'Alcohol is a central nervous system depressant. This means that it is a drug that slows down brain activity. It can change your mood, behavior, and self-control. It can cause problems with memory and thinking clearly.'},
+    {text:'Users of this drug use a pacifier after taking it:',options:['Heroin','MDMA','Meth','All of the above'],answer:'2', explanation: 'Users of ecstasy or MDMA (also known as Molly) use pacifiers to keep them from grinding their teeth down when they are high.'},
   ];
 
 
@@ -156,12 +156,14 @@ export default function Home() {
               {(isSubmitted && isCorrect) && 
                 <Alert>
                   <AlertTitle>Correct</AlertTitle>
+                  <AlertDescription>{questionText["explanation"]}</AlertDescription>
                 </Alert>
               }
 
               {(isSubmitted && !isCorrect) && 
                 <Alert>
                   <AlertTitle>Wrong</AlertTitle>
+                  <AlertDescription>{questionText["explanation"]}</AlertDescription>
                 </Alert>
               }
 
