@@ -112,128 +112,124 @@ export default function Home() {
   }
 
   return (
-    <div className="ml-auto mr-auto w-4/5">
+    <div className="ml-auto mr-auto w-3/5">
+      <div className='font-bold text-2xl mt-2 mb-2'>
+         Drug Abuse Quiz
+      </div>
+      <div className='text-base mb-5'>
+          How much do you really know about drugs?
+      </div>
+
+    <div className="ml-auto mr-auto w-full">
+    {!quizDone && quiz.map((questionText, i) => {
+          if((i + 1) == question){
+            return (
+              
       <Card>
         <CardHeader>
-          <CardTitle>Drug Abuse Quiz</CardTitle>
-          <CardDescription>How much do you know about Drug Abuse?</CardDescription>
+          <Progress className="mb-2" value={question/quiz.length * 100}></Progress>
+          <CardTitle>Question {question} / {quiz.length}:</CardTitle>
         </CardHeader>
+
         <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+              control={form.control}
+              name="answer"
+              render={({ field }) => (
+                <FormItem className="space-y-3">
+                  <FormLabel>
+                    <TextGenerateEffect words={questionText["text"]} duration={0.25}/>
+                    {/* {questionText["text"]} */}
+                  </FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col space-y-1"
+                    >
+                      {questionText["options"].map((option, j) => {
+                        return (
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value={(j+1).toString()} />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {/* <TextGenerateEffect words={option} duration={1} /> */}
+                              {option}
+                            </FormLabel>
+                          </FormItem>
+                        )})}
 
-        <div className="ml-auto mr-auto w-3/5">
-        {!quizDone && quiz.map((questionText, i) => {
-              if((i + 1) == question){
-                return (
-                  
-          <Card>
-            <CardHeader>
-              <Progress className="mb-2" value={question/quiz.length * 100}></Progress>
-              <CardTitle>Question {question} / {quiz.length}:</CardTitle>
-            </CardHeader>
-
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                  <FormField
-                  control={form.control}
-                  name="answer"
-                  render={({ field }) => (
-                    <FormItem className="space-y-3">
-                      <FormLabel>
-                        <TextGenerateEffect words={questionText["text"]} duration={0.25}/>
-                        {/* {questionText["text"]} */}
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                          className="flex flex-col space-y-1"
-                        >
-                          {questionText["options"].map((option, j) => {
-                            return (
-                              <FormItem className="flex items-center space-x-3 space-y-0">
-                                <FormControl>
-                                  <RadioGroupItem value={(j+1).toString()} />
-                                </FormControl>
-                                <FormLabel className="font-normal">
-                                  {/* <TextGenerateEffect words={option} duration={1} /> */}
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            )})}
-
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                  
-                  />
-                  <div className='flex justify-center'>
-                    {isSubmitted ? <Button onClick={()=>nextQuestion()}>Next</Button>:<Button onClick={() => setAnswer(questionText)}>Submit</Button>}
-                  </div>
-                </form>
-              </Form>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              
+              />
+              <div className='flex justify-center'>
+                {isSubmitted ? <Button onClick={()=>nextQuestion()}>Next</Button>:<Button onClick={() => setAnswer(questionText)}>Submit</Button>}
+              </div>
+            </form>
+          </Form>
 
 
-              {(isSubmitted && isCorrect) && 
-                <Alert variant="correct" className='mt-5'>
-                  <AlertTitle>Correct</AlertTitle>
-                  <AlertDescription>{questionText["explanation"]}</AlertDescription>
-                </Alert>
-              }
-
-              {(isSubmitted && !isCorrect) && 
-                <Alert variant="wrong" className='mt-5'>
-                  <AlertTitle>Wrong</AlertTitle>
-                  <AlertDescription>{questionText["explanation"]}</AlertDescription>
-                </Alert>
-              }
-
-            </CardContent>
-          </Card>
-            )}
-          })}
-
-          
-          {quizDone && 
-            <Card>
-              <CardHeader>
-                <CardTitle>You scored {score} / {quiz.length}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {score==quiz.length && 
-                <div>
-                  <TypewriterEffect words={[{text: "Exellent"}, {text: "Job!"}]} />
-                </div>
-                }
-
-                {score < quiz.length && score > quiz.length/2 && 
-                  <div>
-                    <TypewriterEffect words={[{text: "Good"}, {text: "Job!"}]} />
-                  </div>
-                  }
-
-                {score <= quiz.length/2 && score > 0 && 
-                  <div>
-                    <TypewriterEffect words={[{text: "Nice"}, {text: "Try."}]} />
-                  </div>
-                  }
-
-                {score==0 && 
-                  <div>
-                    <TypewriterEffect words={[{text: "Do"}, {text: "Better."}]} />
-                  </div>
-                  }
-              </CardContent>
-            </Card>
+          {(isSubmitted && isCorrect) && 
+            <Alert variant="correct" className='mt-5'>
+              <AlertTitle>Correct</AlertTitle>
+              <AlertDescription>{questionText["explanation"]}</AlertDescription>
+            </Alert>
           }
-          </div>
+
+          {(isSubmitted && !isCorrect) && 
+            <Alert variant="wrong" className='mt-5'>
+              <AlertTitle>Wrong</AlertTitle>
+              <AlertDescription>{questionText["explanation"]}</AlertDescription>
+            </Alert>
+          }
+
         </CardContent>
       </Card>
+        )}
+      })}
 
+      
+      {quizDone && 
+        <Card>
+          <CardHeader>
+            <CardTitle>You scored {score} / {quiz.length}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {score==quiz.length && 
+            <div>
+              <TypewriterEffect words={[{text: "Exellent"}, {text: "Job!"}]} />
+            </div>
+            }
 
+            {score < quiz.length && score > quiz.length/2 && 
+              <div>
+                <TypewriterEffect words={[{text: "Good"}, {text: "Job!"}]} />
+              </div>
+              }
+
+            {score <= quiz.length/2 && score > 0 && 
+              <div>
+                <TypewriterEffect words={[{text: "Nice"}, {text: "Try."}]} />
+              </div>
+              }
+
+            {score==0 && 
+              <div>
+                <TypewriterEffect words={[{text: "Do"}, {text: "Better."}]} />
+              </div>
+              }
+          </CardContent>
+        </Card>
+      }
+      </div>
     </div>
 
     

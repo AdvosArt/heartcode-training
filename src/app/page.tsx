@@ -1,5 +1,6 @@
 //import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { FlipWords } from "@/components/ui/flip-words";
 import { Separator } from "@/components/ui/separator";
 
@@ -25,15 +26,25 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/60 bg-white/60 ">
+    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/60 bg-white/60">
+      <Carousel>
+      <CarouselContent>
+      <CarouselItem>
       <div className="ml-auto mr-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
           <div className="font-bold text-5xl text-center mb-2">
             Don't do<FlipWords words={shuffle(words)} duration={1}/>
             </div>
           <p className="text-base text-center">Save your money for gambling instead</p>
+          <div className="text-center">
+            Swipe left for more
+          </div>
         </div>
-        
+      </div>
+      </CarouselItem>
+
+      <CarouselItem>
+      <div className="ml-auto mr-auto w-4/5 mt-10">
         <Card>
           <CardHeader>
             <CardTitle>What is drug abuse?</CardTitle>
@@ -47,13 +58,13 @@ export default function Home() {
 
             <div className="flex fex-row gap-2 mb-5">
               <p>
-              Substance abuse, also known as drug abuse, is the use of a drug in amounts or by methods that are harmful to the individual or others. It is a form of substance-related disorder. Differing definitions of drug abuse are used in public health, medical, and criminal justice contexts. In some cases, criminal or anti-social behavior occurs when the person is under the influence of a drug, and long-term personality changes in individuals may also occur. In addition to possible physical, social, and psychological harm, the use of some drugs may also lead to criminal penalties, although these vary widely depending on the local jurisdiction.
+              Substance abuse, also known as drug abuse, is <span className="font-bold">the use of a drug in amounts or by methods that are harmful to the individual or others</span>. It is a form of substance-related disorder. Differing definitions of drug abuse are used in public health, medical, and criminal justice contexts. In some cases, criminal or anti-social behavior occurs when the person is under the influence of a drug, and long-term personality changes in individuals may also occur. In addition to <span className="font-bold">possible physical, social, and psychological harm</span>, the use of some drugs may also lead to <span className="font-bold">criminal penalties</span>, although these vary widely depending on the local jurisdiction.
               </p>
             </div>
 
             <div className="flex fex-row gap-2 mb-5">
               <p>
-              Drugs most often associated with this term include alcohol, amphetamines, barbiturates, benzodiazepines, cannabis, cocaine, hallucinogens, methaqualone, and opioids. The exact cause of substance abuse is not clear, but there are two predominant theories: either a genetic predisposition or a habit learned from others, which, if addiction develops, manifests itself as a chronic debilitating disease.
+              Drugs most often associated with this term include <span className="font-bold">alcohol, amphetamines, barbiturates, benzodiazepines, cannabis, cocaine, hallucinogens, methaqualone, and opioids</span>. The exact cause of substance abuse is not clear, but there are two predominant theories: either a genetic predisposition or a habit learned from others, which, <span className="font-bold">if addiction develops, manifests itself as a chronic debilitating disease</span>.
               </p>
             </div>
 
@@ -65,7 +76,9 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
-      
+      </CarouselItem>
+
+      <CarouselItem>
       <div className="flex flex-col justify-center h-dvh ml-auto mr-auto w-4/5">
       <Separator className="mb-10" />
         <div className="text-2xl text-center mb-10">
@@ -85,6 +98,10 @@ export default function Home() {
         </div>
         <Separator className="mb-10" />
       </div>
+      </CarouselItem>
+
+      </CarouselContent>
+      </Carousel>
     </div>
   );
 }

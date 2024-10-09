@@ -4,15 +4,15 @@ import Pfp from "@/app/assets/pfp9_1024.png"
 
 export default function Home() {
   return (
-    <div className="flex-row ml-auto mr-auto w-3/5">
+    <div className="flex-row ml-auto mr-auto w-96">
       <Card>
         <CardHeader>
-            <CardTitle>Hi, I am Gordon!</CardTitle>
-            <CardDescription>Welcome to my page</CardDescription>
+            <CardTitle className="flex justify-center">Hi, I am Gordon!</CardTitle>
+            <CardDescription className="flex justify-center">Welcome to my page</CardDescription>
         </CardHeader>
 
         <CardContent>
-            <Image src={Pfp} alt="Profile Picture" width={200} className="rounded-full ml-auto mr-auto"/>
+            <Image src={Pfp} alt="Profile Picture" width={200} className="rounded-full ml-auto mr-auto mb-5"/>
             <div className="flex flex-row gap-2">
               <p className="font-bold">Name:</p>
               Gordon
