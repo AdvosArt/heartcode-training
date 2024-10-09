@@ -183,23 +183,23 @@ export default function Home() {
                 </div>
                 }
 
-              {score < quiz.length && score > quiz.length/2 && 
-                <div>
-                  <TypewriterEffect words={[{text: "Good"}, {text: "Job!"}]} />
-                </div>
-                }
+                {score < quiz.length && score > quiz.length/2 && 
+                  <div>
+                    <TypewriterEffect words={[{text: "Good"}, {text: "Job!"}]} />
+                  </div>
+                  }
 
-              {score <= quiz.length/2 && score > 0 && 
-                <div>
-                  <TypewriterEffect words={[{text: "Nice"}, {text: "Try."}]} />
-                </div>
-                }
+                {score <= quiz.length/2 && score > 0 && 
+                  <div>
+                    <TypewriterEffect words={[{text: "Nice"}, {text: "Try."}]} />
+                  </div>
+                  }
 
-              {score==0 && 
-                <div>
-                  <TypewriterEffect words={[{text: "Do"}, {text: "Better."}]} />
-                </div>
-                }
+                {score==0 && 
+                  <div>
+                    <TypewriterEffect words={[{text: "Do"}, {text: "Better."}]} />
+                  </div>
+                  }
               </CardContent>
             </Card>
           }
