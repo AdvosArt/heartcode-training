@@ -111,15 +111,14 @@ export function NavigationBar() {
           {navItems.map((navItem, index) => <NavigationItem key={index} navigationLink={navItem.navigationLink} navigationDescription={navItem.navigationDescription} />)}
       </div>
       <div className="flex flex-row justify-end gap-4">
+        <ModeToggle />
 
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-          <ModeToggle />
-          
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </NavigationMenu>
   )
