@@ -1,6 +1,7 @@
 //import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FlipWords } from "@/components/ui/flip-words";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const words: string[] = [
@@ -24,13 +25,13 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/50 bg-white/50 ">
+    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/60 bg-white/60 ">
       <div className="ml-auto mr-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
           <div className="font-bold text-5xl text-center mb-2">
             Don't do<FlipWords words={shuffle(words)} duration={1}/>
             </div>
-          <p className="text-base text-center">Save your money for your Discord Kitten</p>
+          <p className="text-base text-center">Save your money for gambling instead</p>
         </div>
         
         <Card>
@@ -40,7 +41,7 @@ export default function Home() {
           <CardContent>
             <div className="flex fex-row gap-2 mb-5">
               <p className="font-bold">
-                From <a href="https://en.wikipedia.org/wiki/Substance_abuse" className="text-blue-500">Wikipedia</a>:
+                From <a href="https://en.wikipedia.org/wiki/Substance_abuse" className="text-blue-700 dark:text-blue-400">Wikipedia</a>:
               </p>
             </div>
 
@@ -64,26 +65,26 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
-
+      
       <div className="flex flex-col justify-center h-dvh ml-auto mr-auto w-4/5">
-          <div className="text-2xl text-center mb-10">
-          What's the situation in Singapore? Here's <a href="https://www.cnb.gov.sg/docs/default-source/drug-situation-report-documents/cnb-annual-statistics-2023.pdf" className="text-blue-500">some statistics from 2023</a> from the CNB:
-          </div>
-          <div className="text-2xl text-center mb-10">
-          In 2023, CNB arrested <span className="font-bold">3,122 drug abusers</span>, an <span className="font-bold">increase of 10%</span> from the 2,826 abusers arrested in 2022. 
-          </div>
-          <div className="text-2xl text-center mb-10">
-          859 (28%) of all drug abusers arrested were <span className="font-bold">below 30 years old</span>. The number of youth abusers arrested (i.e., aged below 20 years old) <span className="font-bold">increased by 11%</span> to 132 in 2023 from 119 in 2022.
-          </div>
-          <div className="text-2xl text-center mb-10">
-          <span className="font-bold">Methamphetamine, heroin, and cannabis</span> were the three most commonly abused drugs in 2023, with 94% of drug abusers arrested abusing at least one of these three drugs. 
-          </div>
-          <div className="text-2xl text-center mb-10 font-bold">
-          Do not be part of the statistic! 
-          </div>
+      <Separator className="mb-10" />
+        <div className="text-2xl text-center mb-10">
+        What's the situation in Singapore? Here's <a href="https://www.cnb.gov.sg/docs/default-source/drug-situation-report-documents/cnb-annual-statistics-2023.pdf" className="text-blue-700 dark:text-blue-400">some statistics from 2023</a> from the CNB:
         </div>
+        <div className="text-2xl text-center mb-10">
+        In 2023, CNB arrested <span className="font-bold">3,122 drug abusers</span>, an <span className="font-bold">increase of 10%</span> from the 2,826 abusers arrested in 2022. 
+        </div>
+        <div className="text-2xl text-center mb-10">
+        859 (28%) of all drug abusers arrested were <span className="font-bold">below 30 years old</span>. The number of youth abusers arrested (i.e., aged below 20 years old) <span className="font-bold">increased by 11%</span> to 132 in 2023 from 119 in 2022.
+        </div>
+        <div className="text-2xl text-center mb-10">
+        <span className="font-bold">Methamphetamine, heroin, and cannabis</span> were the three most commonly abused drugs in 2023, with 94% of drug abusers arrested abusing at least one of these three drugs. 
+        </div>
+        <div className="text-2xl text-center mb-10 font-bold">
+        Do not be part of the statistic! 
+        </div>
+        <Separator className="mb-10" />
+      </div>
     </div>
-
-
   );
 }
