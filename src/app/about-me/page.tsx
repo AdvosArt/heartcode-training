@@ -4,7 +4,7 @@ import Pfp from "@/app/assets/pfp9_1024.png"
 
 export default function Home() {
   return (
-    <div className="flew-row ml-auto mr-auto w-3/5">
+    <div className="flex-row ml-auto mr-auto w-3/5">
       <Card>
         <CardHeader>
             <CardTitle>Hi, I am Gordon!</CardTitle>
