@@ -7,15 +7,23 @@ import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
   //NavigationMenuContent,
-  NavigationMenuItem,
+  //NavigationMenuItem,
   NavigationMenuLink,
-  NavigationMenuList,
+  //NavigationMenuList,
   //NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  //navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { ModeToggle } from "@/components/mode-toggle";
 
 import { NavigationItem, NavItem } from "./navigation-item";
+
+import {
+  //ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 
 
@@ -102,8 +110,16 @@ export function NavigationBar() {
       <div className="flex flex-row justify-start gap-4">
           {navItems.map((navItem, index) => <NavigationItem key={index} navigationLink={navItem.navigationLink} navigationDescription={navItem.navigationDescription} />)}
       </div>
-      <div className="flex flex-row justify-end">
+      <div className="flex flex-row justify-end gap-4">
+
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
           <ModeToggle />
+          
       </div>
     </NavigationMenu>
   )

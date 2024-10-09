@@ -50,8 +50,8 @@ export default function Home() {
   // ];
   const quiz = [
     {text:'Which one of these is NOT a commonly used recrational drug?',options:['Methamphetamine','Ketamine','Fentanyl','Paracetamol',],answer:'4', explanation: 'Paracetamol is a common pailkiller drug. While still dangerous to overdose on, it is not a common recreational drug.'},
-    {text:'For how long can cocaine be detected in a standard urine test?',options:['48 hours','27 days','4 to 5 days','90 days'],answer:'3', explanation: 'Cocaine stays in urine for up to 4 to 5 days, in Blood and Saliva for up to 48 hours, and in hair follicles for up to 90 days.'},
-    {text:"Once you start injecting drugs it's impossible to stop using drugs.",options:['True', 'False'],answer:'2', explanation: 'While difficult, it is possible to stop taking drugs with enough help like rehabilitaion and therapy.'},
+    {text:'For how long can cocaine be detected in a standard urine test?',options:['48 hours','4 to 5 days','27 days','90 days'],answer:'2', explanation: 'Cocaine stays in urine for up to 4 to 5 days, in Blood and Saliva for up to 48 hours, and in hair follicles for up to 90 days.'},
+    {text:"Once you start injecting drugs it's impossible to stop using drugs.",options:['True', 'False'],answer:'2', explanation: 'Although it is very difficult, it is possible to stop taking drugs with enough help like rehabilitaion and therapy.'},
     {text:'Which of the following is NOT a long term effect from cannabis?',options:['Feeling permanently relaxed','Reduced Motivation','Frequent illness','Change in hormones'],answer:'1', explanation: 'Long term cannabis use can affect motivation, hormones and general health but does not cause a permanent feeling of relaxation.'},
     {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Up to 10 years imprisonment', 'S$20,000 fine', 'All of the above'],answer:'3', explanation: 'Penalties for the possesion or consumption of drugs of any kind in Singapore are up to 10 years imprisonment and a S$20,000 fine.'},
     {text:'Heroin is made from the poppy plant.',options:['True', 'False'],answer:'1', explanation: 'The poppy plant, Papaver somniferum, produces opium, a powerful narcotic whose derivatives include morphine, codeine, heroin, and oxycodone.'},
@@ -116,7 +116,7 @@ export default function Home() {
                   render={({ field }) => (
                     <FormItem className="space-y-3">
                       <FormLabel>
-                        <TextGenerateEffect words={questionText["text"]} duration={0.5}/>
+                        <TextGenerateEffect words={questionText["text"]} duration={0.25}/>
                         {/* {questionText["text"]} */}
                       </FormLabel>
                       <FormControl>
@@ -154,14 +154,14 @@ export default function Home() {
 
 
               {(isSubmitted && isCorrect) && 
-                <Alert>
+                <Alert variant="correct" className='mt-5'>
                   <AlertTitle>Correct</AlertTitle>
                   <AlertDescription>{questionText["explanation"]}</AlertDescription>
                 </Alert>
               }
 
               {(isSubmitted && !isCorrect) && 
-                <Alert>
+                <Alert variant="wrong" className='mt-5'>
                   <AlertTitle>Wrong</AlertTitle>
                   <AlertDescription>{questionText["explanation"]}</AlertDescription>
                 </Alert>
@@ -176,7 +176,7 @@ export default function Home() {
           {quizDone && 
             <Card>
               <CardHeader>
-                <CardTitle>You scored {score}/{quiz.length}</CardTitle>
+                <CardTitle>You scored {score} / {quiz.length}</CardTitle>
               </CardHeader>
               <CardContent>
                 {score==quiz.length && 

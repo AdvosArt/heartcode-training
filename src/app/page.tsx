@@ -24,7 +24,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-no-repeat">
+    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/50 bg-white/50">
       <div className="ml-auto mr-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
           <div className="font-bold text-5xl text-center mb-2">
