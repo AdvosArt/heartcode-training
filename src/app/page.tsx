@@ -1,13 +1,36 @@
 //import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FlipWords } from "@/components/ui/flip-words";
 
 export default function Home() {
+  const words: string[] = [
+    "Cocaine", "Angel Power", 
+    "Crack", 
+    "Fentanyl", "Fent", 
+    "Heroin", "Diamorphine",
+    "Ketamine", 
+    "LSD", "Acid", 
+    "Marijuana", "Ganja", "Weed", "420", "Spice", "K2",
+    "MDMA", "Bath Salts", 
+    "Methamphetamine", "Meth", "Crystal", "Glass (Meth)", 
+    "Mushrooms", "Shrooms", 
+    "Opium", 
+    "PCP", 
+    "Alchohol",
+    "Opium", "Morphine",
+  ]
+  const shuffle = (array: string[]) => { 
+    return array.sort(() => Math.random() - 0.5);
+  };
+
   return (
     <div className="bg-[url('/bg_image.jpg')] bg-cover bg-no-repeat">
       <div className="ml-auto mr-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
-          <p className="font-bold text-5xl text-center mb-2">Do drugs</p>
-          <p className="text-base text-center">It's all really good ong</p>
+          <div className="font-bold text-5xl text-center mb-2">
+            Don't do<FlipWords words={shuffle(words)} duration={1}/>
+            </div>
+          <p className="text-base text-center">Save your money for your Discord Kitten</p>
         </div>
         
         <Card>

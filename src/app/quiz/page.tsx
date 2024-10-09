@@ -16,8 +16,12 @@ import {
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { number, z } from "zod"
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { z } from "zod"
+import { Alert, AlertTitle } from '@/components/ui/alert';
+import { Progress } from '@/components/ui/progress';
+
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
+import { TypewriterEffect } from '@/components/ui/typewriter-effect';
 
 
 const FormSchema = z.object({
@@ -34,14 +38,27 @@ export default function Home() {
   const [question, setQuestion] = useState(1)
   const [quizDone, setQuizDone] = useState(false)
   const [currentAnswer, setCurrentAnswer] = useState('')
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
+  // const quiz = [
+  //   {text:'Qn1',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'2'},
+  //   {text:'Qn2',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'3'},
+  //   {text:'Qn3',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'4'},
+  //   {text:'Qn4',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'1'},
+  // ];
   const quiz = [
-    {text:'Qn1',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'2'},
-    {text:'Qn2',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'3'},
-    {text:'Qn3',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'4'},
-    {text:'Qn4',options:['Opt 1','Opt 2','Opt 3','Opt 4'],answer:'1'},
+    {text:'Which one of these is NOT a commonly used recrational drug?',options:['Methamphetamine','Ketamine','Fentanyl','Paracetamol',],answer:'4'},
+    {text:'For how long can cocaine be detected in a standard urine test?',options:['1 week','1 month','4 to 5 days','27 days'],answer:'3'},
+    {text:"Once you start injecting drugs it's impossible to stop using drugs.",options:['True', 'False'],answer:'2'},
+    {text:'Which of the following is NOT a long term effect from cannabis?',options:['Feeling permanently relaxed','Reduced Motivation','Frequent illness','Change in hormones'],answer:'1'},
+    {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Up to 10 years imprisonment', 'S$20,000 fine', 'All of the above'],answer:'3'},
+    {text:'Heroin is made from the poppy plant.',options:['True', 'False'],answer:'1'},
+    {text:'Death from ecstasy (MDMA) use can be caused by the body overheating and by dehydration.',options:['True','False'],answer:'1'},
+    {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',options:['Whatsapp', 'Wechat', 'Telegram' ,"Discord"],answer:'3'},
+    {text:'Drinking black coffee does not help a person sober up after drinking alcohol.',options:['True','False'],answer:'1'},
+    {text:'Users of this drug use a pacifier after taking it to keep them from grinding their teeth.',options:['Heroin','MDMA','Meth','All of the above'],answer:'2'},
   ];
 
 
@@ -59,6 +76,7 @@ export default function Home() {
   }
 
   function nextQuestion() {
+    form.reset()
     setQuestion(question + 1)
     setIsCorrect(false)
     setIsSubmitted(false)
@@ -79,13 +97,14 @@ export default function Home() {
         <CardContent>
 
         <div className="ml-auto mr-auto w-3/5">
-        {!quizDone && quiz.map((x, i) => {
+        {!quizDone && quiz.map((questionText, i) => {
               if((i + 1) == question){
                 return (
                   
           <Card>
             <CardHeader>
-              <CardTitle>Question {question}:</CardTitle>
+              <Progress className="mb-2" value={question/quiz.length * 100}></Progress>
+              <CardTitle>Question {question} / {quiz.length}:</CardTitle>
             </CardHeader>
 
             <CardContent>
@@ -97,49 +116,28 @@ export default function Home() {
                   render={({ field }) => (
                     <FormItem className="space-y-3">
                       <FormLabel>
-                        {x["text"]}
+                        <TextGenerateEffect words={questionText["text"]} duration={0.5}/>
+                        {/* {questionText["text"]} */}
                       </FormLabel>
                       <FormControl>
                         <RadioGroup
+                          value={field.value}
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="1" />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                              {x["options"][0]}
-                            </FormLabel>
-                          </FormItem>
-
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="2" />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                              {x["options"][1]}
-                            </FormLabel>
-                          </FormItem>
-
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="3" />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                             {x["options"][2]}
-                            </FormLabel>
-                          </FormItem>
-
-                          <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormControl>
-                              <RadioGroupItem value="4" />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                             {x["options"][3]}
-                            </FormLabel>
-                          </FormItem>
+                          {questionText["options"].map((option, j) => {
+                            return (
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value={(j+1).toString()} />
+                                </FormControl>
+                                <FormLabel className="font-normal">
+                                  {/* <TextGenerateEffect words={option} duration={1} /> */}
+                                  {option}
+                                </FormLabel>
+                              </FormItem>
+                            )})}
 
                         </RadioGroup>
                       </FormControl>
@@ -149,7 +147,7 @@ export default function Home() {
                   
                   />
                   <div className='flex justify-center'>
-                    {isSubmitted ? <Button onClick={()=>nextQuestion()}>Next</Button>:<Button onClick={() => setAnswer(x)}>Submit</Button>}
+                    {isSubmitted ? <Button onClick={()=>nextQuestion()}>Next</Button>:<Button onClick={() => setAnswer(questionText)}>Submit</Button>}
                   </div>
                 </form>
               </Form>
@@ -181,19 +179,25 @@ export default function Home() {
               <CardContent>
                 {score==quiz.length && 
                 <div>
-                  Full Marks!
+                  <TypewriterEffect words={[{text: "Exellent"}, {text: "Job!"}]} />
                 </div>
                 }
 
-              {score < quiz.length && score != 0 && 
+              {score < quiz.length && score > quiz.length/2 && 
                 <div>
-                  Nice Try!
+                  <TypewriterEffect words={[{text: "Good"}, {text: "Job!"}]} />
+                </div>
+                }
+
+              {score <= quiz.length/2 && score > 0 && 
+                <div>
+                  <TypewriterEffect words={[{text: "Nice"}, {text: "Try."}]} />
                 </div>
                 }
 
               {score==0 && 
                 <div>
-                  Do better.
+                  <TypewriterEffect words={[{text: "Do"}, {text: "Better."}]} />
                 </div>
                 }
               </CardContent>

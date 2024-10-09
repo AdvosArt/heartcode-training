@@ -15,6 +15,10 @@ import {
 } from "@/components/ui/navigation-menu"
 import { ModeToggle } from "@/components/mode-toggle";
 
+import { NavigationItem, NavItem } from "./navigation-item";
+
+
+
 // const components: { title: string; href: string; description: string }[] = [
 //   {
 //     title: "Alert Dialog",
@@ -53,37 +57,54 @@ import { ModeToggle } from "@/components/mode-toggle";
 //   },
 // ]
 
-export function MyNavigationMenu() {
+
+const navItems: NavItem[] = [
+	{ navigationLink: "/", navigationDescription: "Project Heartcode" },
+	{ navigationLink: "/quiz", navigationDescription: "Quiz" },
+	{ navigationLink: "/about-me", navigationDescription: "About Me" },
+]
+
+
+export function NavigationBar() {
   return (
-    <NavigationMenu className="flex flex-row justify-between min-w-full list-none h-16 sticky top-0 p-5">
-      <NavigationMenuList>
-          <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-              </NavigationMenuLink>
-          </Link>
-          </NavigationMenuItem>
+    // <NavigationMenu className="flex flex-row justify-between min-w-full list-none h-16 sticky top-0 p-5">
+    //   <NavigationMenuList>
+    //       <NavigationMenuItem>
+    //       <Link href="/" legacyBehavior passHref>
+    //           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+    //           Home
+    //           </NavigationMenuLink>
+    //       </Link>
+    //       </NavigationMenuItem>
 
-          <NavigationMenuItem>
-          <Link href="/quiz" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Quiz
-              </NavigationMenuLink>
-          </Link>
-          </NavigationMenuItem>
+    //       <NavigationMenuItem>
+    //       <Link href="/quiz" legacyBehavior passHref>
+    //           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+    //           Quiz
+    //           </NavigationMenuLink>
+    //       </Link>
+    //       </NavigationMenuItem>
 
-          <NavigationMenuItem>
-          <Link href="/about-me" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              About Me
-              </NavigationMenuLink>
-          </Link>
-          </NavigationMenuItem>
+    //       <NavigationMenuItem>
+    //       <Link href="/about-me" legacyBehavior passHref>
+    //           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+    //           About Me
+    //           </NavigationMenuLink>
+    //       </Link>
+    //       </NavigationMenuItem>
 
-        </NavigationMenuList>
+    //     </NavigationMenuList>
 
-        <ModeToggle />
+    //     <ModeToggle />
+    // </NavigationMenu>
+
+    <NavigationMenu className="flex flex-row justify-between min-w-full list-none h-[60px] sticky top-0 p-5">
+      <div className="flex flex-row justify-start gap-4">
+          {navItems.map((navItem, index) => <NavigationItem key={index} navigationLink={navItem.navigationLink} navigationDescription={navItem.navigationDescription} />)}
+      </div>
+      <div className="flex flex-row justify-end">
+          <ModeToggle />
+      </div>
     </NavigationMenu>
   )
 }
