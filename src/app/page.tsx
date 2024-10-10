@@ -23,6 +23,7 @@ export default function Home() {
     "Opium", "Morphine",
     "Tabacco", "Nicotine", "Vapes"
   ]
+  
   const shuffle = (array: string[]) => { 
     return array.sort(() => Math.random() - 0.5);
   };

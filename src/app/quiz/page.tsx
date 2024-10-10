@@ -22,6 +22,7 @@ import { Progress } from '@/components/ui/progress';
 import { TypewriterEffect } from '@/components/ui/typewriter-effect';
 import { Input } from '@/components/ui/input';
 import { uploadScore } from '../server/user';
+import { PiDeviceMobileLight } from 'react-icons/pi';
 
 const FormSchema_quiz = z.object({
   answer: z.enum(["1", "2", "3", "4"], { // Add more options here
@@ -46,6 +47,7 @@ export default function Home() {
   const [currentAnswer, setCurrentAnswer] = useState('')
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const debugMode = false
 
   const form_quiz = useForm<z.infer<typeof FormSchema_quiz>>({
     resolver: zodResolver(FormSchema_quiz),
@@ -64,8 +66,12 @@ export default function Home() {
       options:['Methamphetamine','Ketamine','Fentanyl','Paracetamol',],
       answer:'4',
       explanation: 'Paracetamol is a common pailkiller drug. While still dangerous to overdose on, it is not a common recreational drug.'},
+    {text:'Myth or Fact: As a Singaporean, taking drugs overseas will still get me arrested upon returning to the country.',
+      options:['Myth', 'Fact'],
+      answer:'2',
+      explanation: 'Any Singapore Citizen or Permanent Resident found to have abused drugs overseas will be treated as if he/she had abused drugs within Singapore.'},
     {text:'For how long can cocaine be detected in a standard urine test?',
-      options:['48 hours','4 to 5 days','27 days','90 days'],
+      options:['48 hours','4 to 5 days','27 to 30 days','90 days'],
       answer:'2',
       explanation: 'Cocaine stays in urine for up to 4 to 5 days, in Blood and Saliva for up to 48 hours, and in hair follicles for up to 90 days.'},
     {text:"Once you start injecting drugs it's impossible to stop using drugs.",
@@ -76,6 +82,11 @@ export default function Home() {
       options:['Feeling permanently relaxed','Reduced Motivation','Frequent illness','Change in hormones'],
       answer:'1',
       explanation: 'Long term cannabis use can affect motivation, hormones and general health but does not cause a permanent feeling of relaxation.'},
+
+    {text:'Myth or Fact: Marijuana is not as bad for you as cigarettes',
+      options:['Myth', 'Fact'],
+      answer:'1',
+      explanation: 'Marijuana smoke contains more carcinogens than tobacco'},
     {text:'Penalties for the possesion or consumption of Cannabis in Singapore are:',
       options:['Up to 10 years imprisonment', 'S$20,000 fine', 'All of the above'],
       answer:'3',
@@ -84,10 +95,19 @@ export default function Home() {
       options:['True', 'False'],
       answer:'1',
       explanation: 'The poppy plant, Papaver somniferum, produces opium, a powerful narcotic whose derivatives include morphine, codeine, heroin, and oxycodone.'},
+    {text:'Myth or Fact: Being addicted to drugs can damage the brain',
+      options:['Myth', 'Fact'],
+      answer:'2',
+      explanation: 'Drugs can damage brain cells through several mechanisms. Psychostimulants (e.g., amphetamines) and alcohol disrupt the integrity of the blood-brain barrier (BBB), which can change the functioning of your brain cells due to increased permeability.'},
     {text:'Death from ecstasy (MDMA) use can be caused by the body overheating and by dehydration.',
       options:['True','False'],
       answer:'1',
       explanation: 'Symptoms of Ecstacy Overdose include abnormal heart rates, body temperature dysregulation, hyperthermia, and seizures.'},
+
+    {text:'Myth or Fact: Steroid creams can be bought in drug stores. Doctors prescribe steroids to treat allergies. So using steroids to build muscles must be OK.',
+      options:['Myth', 'Fact'],
+      answer:'1',
+      explanation: 'There are different types of steroids. Steroids used to treat rashes and allergies are not the same as steroids used to increase muscle growth.'},
     {text:'The most common channel of communication for drug dealers online is:',
       options:['Whatsapp', 'Wechat', 'Telegram' ,"Discord"],
       answer:'3',
@@ -100,6 +120,32 @@ export default function Home() {
       options:['Heroin','MDMA','Meth','All of the above'],
       answer:'2',
       explanation: 'Users of ecstasy or MDMA (also known as Molly) use pacifiers to keep them from grinding their teeth down when they are high.'},
+    {text:'Myth or Fact: Alcohol makes it easier for people to socialise.',
+      options:['Myth', 'Fact'],
+      answer:'1',
+      explanation: 'Alcohol in small quantities can make people feel more relaxed and sociable. However, alcohol is a “downer”. Drinking too much alcohol can make people want to withdraw from others, or feel aggressive.'},
+
+    {text:'A burnt spoon could indicate the use of which drug?',
+      options:['Crack Cocaine','Heroin','All of the above'],
+      answer:'3',
+      explanation: 'Spoons are heated to dissolve heroin for injection purposes. Drug users will heat crack cocaine to smoke.'},
+    {text:'Glass pipes are usually used to smoke:',
+      options:['Meth','Ecstacy','Fentanyl','All of the above'],
+      answer:'1',
+      explanation: 'In addition to being snorted, injected or taken in pill form, drug users also smoke crystal meth using a glass pipe. Glass pipes are also used to smoke PCP, crack cocaine and opium.'},
+    {text:'Myth or Fact: You can get addicted to perscription drugs.',
+      options:['Myth', 'Fact'],
+      answer:'2',
+      explanation: "Just because a doctor prescribes medication doesn't mean it's harmless. The reality is that prescription drugs, such as opiates and benzodiazepines, are highly addictive and can cause bigger problems than what they were initially prescribed to treat."},
+    {text:'Myth or Fact: You will get addicted to Heroin the first time you use it',
+      options:['Myth', 'Fact'],
+      answer:'1',
+      explanation: 'Heroin has an undeniably high addiction potential. But that doesn’t mean that every person who tries heroin gets addicted to it. In fact, only 23% of people who try heroin end up developing a substance use disorder. Regardless, you should not be tempted to try it.'},
+    {text:'Myth or Fact: The penelty for Drug trafficking in Singapore is the death sentence.',
+      options:['Myth', 'Fact'],
+      answer:'2',
+      explanation: 'Illegal traffic, import, or export of drugs of any kind will result in the death penalty'},
+    
   ];
 
   function onQuestionSubmit(data: z.infer<typeof FormSchema_quiz>) {
@@ -183,10 +229,26 @@ export default function Home() {
                             <FormControl>
                               <RadioGroupItem value={(j+1).toString()} />
                             </FormControl>
+                            {Number(questionText["answer"]) == j+1 && debugMode &&
+                            <FormLabel className="font-normal text-emerald-600">
+                              {/* <TextGenerateEffect words={option} duration={1} /> */}
+                              {option}
+                            </FormLabel>
+                            }
+
+                            {Number(questionText["answer"]) != j+1 && debugMode &&
                             <FormLabel className="font-normal">
                               {/* <TextGenerateEffect words={option} duration={1} /> */}
                               {option}
                             </FormLabel>
+                            }
+
+                            {!debugMode &&
+                            <FormLabel className="font-normal">
+                              {/* <TextGenerateEffect words={option} duration={1} /> */}
+                              {option}
+                            </FormLabel>
+                            }
                           </FormItem>
                         )})}
 
