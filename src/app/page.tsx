@@ -23,7 +23,7 @@ export default function Home() {
     "Opium", "Morphine",
     "Tabacco", "Nicotine", "Vapes"
   ]
-  
+
   const shuffle = (array: string[]) => { 
     return array.sort(() => Math.random() - 0.5);
   };
@@ -33,7 +33,7 @@ export default function Home() {
       <Carousel>
       <CarouselContent>
       <CarouselItem>
-      <div className="ml-auto mr-auto w-4/5">
+      <div className="mx-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
           <div className="font-bold text-5xl text-center mb-2">
             Don't do<FlipWords words={shuffle(words)} duration={1}/>

@@ -185,7 +185,7 @@ export default function Home() {
 
   return (
     <div className='bg-gradient-to-t from-[#FF6100]/25 dark:from-[#0094FF]/25 min-h-screen'>
-    <div className="ml-auto mr-auto w-3/5">
+    <div className="mx-auto w-3/5">
       <div className='font-bold text-2xl mt-2 mb-2'>
          Substance Abuse Quiz
       </div>
@@ -193,7 +193,7 @@ export default function Home() {
           How much do you really know about drugs?
       </div>
 
-    <div className="ml-auto mr-auto w-full">
+    <div className="mx-auto w-full">
     {!quizDone && quiz.map((questionText, i) => {
           if((i + 1) == question){
             return (
