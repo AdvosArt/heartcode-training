@@ -43,7 +43,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-end">
-              Follow me on:&nbsp;<a href="https://x.com/AdvosArt">Twitter</a>/<a href="https://www.instagram.com/advosart/">Instagram</a>
+              Follow me on:&nbsp;<a href="https://x.com/AdvosArt" target="_blank" className="text-blue-700 dark:text-blue-400">Twitter</a>/<a href="https://www.instagram.com/advosart/" target="_blank" className="text-blue-700 dark:text-blue-400">Instagram</a>
             </div>
         </CardContent>
       </Card>
