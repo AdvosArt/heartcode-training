@@ -4,6 +4,7 @@ import Pfp from "@/app/assets/pfp9_1024.png"
 
 export default function Home() {
   return (
+    <div className='bg-gradient-to-t from-[#FF6100]/25 dark:from-[#0094FF]/25 min-h-screen'>
     <div className="flex-row ml-auto mr-auto w-96">
       <Card>
         <CardHeader>
@@ -35,6 +36,7 @@ export default function Home() {
             </div>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 }

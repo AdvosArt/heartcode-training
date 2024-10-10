@@ -1,0 +1,45 @@
+{
+  "id": "6d1572a3-c2e9-4e13-890d-bf32c7960577",
+  "prevId": "30d8fabd-d15c-46b6-983d-fb772b29840c",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.heartcodeTraining_user": {
+      "name": "heartcodeTraining_user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "isDrugDealer": {
+          "name": "isDrugDealer",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

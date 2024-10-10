@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { FlipWords } from "@/components/ui/flip-words";
 import { Separator } from "@/components/ui/separator";
+import { PiHandSwipeRightBold } from "react-icons/pi";
 
 export default function Home() {
   const words: string[] = [
@@ -20,13 +21,14 @@ export default function Home() {
     "PCP", 
     "Alchohol",
     "Opium", "Morphine",
+    "Tabacco", "Nicotine", "Vapes"
   ]
   const shuffle = (array: string[]) => { 
     return array.sort(() => Math.random() - 0.5);
   };
 
   return (
-    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/60 bg-white/60">
+    <div className="bg-[url('/bg_image.jpg')] bg-cover bg-fixed bg-no-repeat bg-blend-screen dark:bg-blend-overlay dark:bg-black/75 bg-white/75">
       <Carousel>
       <CarouselContent>
       <CarouselItem>
@@ -36,9 +38,9 @@ export default function Home() {
             Don't do<FlipWords words={shuffle(words)} duration={1}/>
             </div>
           <p className="text-base text-center">Save your money for gambling instead</p>
-          <div className="text-center">
-            Swipe left for more
-          </div>
+          <div className="flex text-3xl justify-center mt-10">
+            <PiHandSwipeRightBold />
+            </div>
         </div>
       </div>
       </CarouselItem>
@@ -47,12 +49,12 @@ export default function Home() {
       <div className="ml-auto mr-auto w-4/5 mt-10">
         <Card>
           <CardHeader>
-            <CardTitle>What is drug abuse?</CardTitle>
+            <CardTitle>What is Substance abuse?</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex fex-row gap-2 mb-5">
               <p className="font-bold">
-                From <a href="https://en.wikipedia.org/wiki/Substance_abuse" className="text-blue-700 dark:text-blue-400">Wikipedia</a>:
+                From <a href="https://en.wikipedia.org/wiki/Substance_abuse" target="_blank" className="text-blue-700 dark:text-blue-400">Wikipedia</a>:
               </p>
             </div>
 
@@ -75,6 +77,9 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
+        <div className="flex text-3xl justify-center mt-10">
+          <PiHandSwipeRightBold />
+        </div>
       </div>
       </CarouselItem>
 
@@ -82,7 +87,7 @@ export default function Home() {
       <div className="flex flex-col justify-center h-dvh ml-auto mr-auto w-4/5">
       <Separator className="mb-10" />
         <div className="text-2xl text-center mb-10">
-        What's the situation in Singapore? Here's <a href="https://www.cnb.gov.sg/docs/default-source/drug-situation-report-documents/cnb-annual-statistics-2023.pdf" className="text-blue-700 dark:text-blue-400">some statistics from 2023</a> from the CNB:
+        What's the situation in Singapore? Here's <a href="https://www.cnb.gov.sg/docs/default-source/drug-situation-report-documents/cnb-annual-statistics-2023.pdf" target="_blank" className="text-blue-700 dark:text-blue-400">some statistics from 2023</a> from the CNB:
         </div>
         <div className="text-2xl text-center mb-10">
         In 2023, CNB arrested <span className="font-bold">3,122 drug abusers</span>, an <span className="font-bold">increase of 10%</span> from the 2,826 abusers arrested in 2022. 
@@ -102,6 +107,7 @@ export default function Home() {
 
       </CarouselContent>
       </Carousel>
+
     </div>
   );
 }
