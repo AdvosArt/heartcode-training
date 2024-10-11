@@ -47,7 +47,7 @@ export default function Home() {
   const [currentAnswer, setCurrentAnswer] = useState('')
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
   const nameInputRef = useRef<HTMLInputElement>(null);
-  const debugMode = false
+  const [debugMode, setDebugMode] = useState(false)
 
   const form_quiz = useForm<z.infer<typeof FormSchema_quiz>>({
     resolver: zodResolver(FormSchema_quiz),
@@ -181,6 +181,10 @@ export default function Home() {
     const name: string = nameInputRef.current?.value || "anon"
     setScoreSubmitted(true)
     uploadScore(name, score)
+  }
+
+  function toggleDebug() {
+    setDebugMode(!debugMode)
   }
 
   return (
@@ -354,6 +358,9 @@ export default function Home() {
       }
       </div>
     </div>
+
+    <div onClick={()=>toggleDebug()} className='h-5 mx-auto w-1/12'/>
+
     </div>
     
   );

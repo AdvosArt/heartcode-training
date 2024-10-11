@@ -50,11 +50,11 @@ export default function Home() {
     </div>
 
     {!gifToggle &&
-    <Image onClick={()=>changeGif()} src={Nugget} unoptimized={true} alt="Nugget" width={64} className="mx-auto mt-48"/>
+    <Image style={{cursor: "pointer"}} onClick={()=>changeGif()} src={Nugget} unoptimized={true} alt="Nugget" width={64} className="mx-auto mt-48"/>
     }
     
     {gifToggle &&
-    <Image onClick={()=>changeGif()} src={McSpicy} unoptimized={true} alt="Nugget" width={64} className="mx-auto mt-48"/>
+    <Image style={{cursor: "pointer"}} onClick={()=>changeGif()} src={McSpicy} unoptimized={true} alt="Nugget" width={64} className="mx-auto mt-48"/>
     }
 
     </div>
