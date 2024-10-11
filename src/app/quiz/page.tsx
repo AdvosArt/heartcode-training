@@ -22,7 +22,7 @@ import { Progress } from '@/components/ui/progress';
 import { TypewriterEffect } from '@/components/ui/typewriter-effect';
 import { Input } from '@/components/ui/input';
 import { uploadScore } from '../server/user';
-import { PiDeviceMobileLight } from 'react-icons/pi';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
 
 const FormSchema_quiz = z.object({
   answer: z.enum(["1", "2", "3", "4"], { // Add more options here
@@ -198,10 +198,11 @@ export default function Home() {
       </div>
 
     <div className="mx-auto w-full">
+    <BackgroundGradient className="rounded-[22px] sm:p-5 bg-white dark:bg-zinc-900">
     {!quizDone && quiz.map((questionText, i) => {
           if((i + 1) == question){
             return (
-              
+      
       <Card>
         <CardHeader>
           <Progress className="mb-2" value={question/quiz.length * 100} />
@@ -355,7 +356,9 @@ export default function Home() {
 
           </CardContent>
         </Card>
+        
       }
+      </BackgroundGradient>
       </div>
     </div>
 
