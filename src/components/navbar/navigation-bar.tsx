@@ -71,6 +71,7 @@ const navItems: NavItem[] = [
 	{ navigationLink: "/", navigationDescription: "Project Heartcode" },
 	{ navigationLink: "/quiz", navigationDescription: "Quiz" },
 	{ navigationLink: "/about-me", navigationDescription: "About Me" },
+  // { navigationLink: "/nugget", navigationDescription: "Nugget" },
 ]
 
 
