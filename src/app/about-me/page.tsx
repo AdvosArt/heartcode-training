@@ -6,6 +6,7 @@ import Pfp from "@/app/assets/pfp9_1024.png"
 import Nugget from "@/app/assets/nuggetRender_64.gif"
 import McSpicy from "@/app/assets/mcspicyRender_64.gif"
 import { useState } from "react";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 
 export default function Home() {
   const [gifToggle, setGifToggle] = useState(false)
@@ -17,6 +18,7 @@ export default function Home() {
   return (
     <div className='bg-gradient-to-t from-[#FF6100]/25 dark:from-[#0094FF]/25 min-h-screen'>
     <div className="flex-row mx-auto w-96">
+    <BackgroundGradient className="rounded-[22px] sm:p-5 bg-white dark:bg-zinc-900">
       <Card>
         <CardHeader>
             <CardTitle className="flex justify-center">Hi, I am Gordon!</CardTitle>
@@ -47,6 +49,7 @@ export default function Home() {
             </div>
         </CardContent>
       </Card>
+    </BackgroundGradient>
     </div>
 
     {!gifToggle &&
