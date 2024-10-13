@@ -36,9 +36,9 @@ export default function Home() {
       <div className="mx-auto w-4/5">
         <div className="flex flex-col justify-center h-dvh">
           <div className="font-bold text-5xl text-center mb-2">
-            Don't do<FlipWords words={shuffle(words)} duration={1}/>
+            Say no to <FlipWords words={shuffle(words)} duration={1}/>
             </div>
-          <p className="text-base text-center">Save your money for gambling instead</p>
+          <p className="text-base text-center">Don't do drugs.</p>
           <div className="flex text-3xl justify-center mt-10">
             <PiHandSwipeRightBold />
             </div>
