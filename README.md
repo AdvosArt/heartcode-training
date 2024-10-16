@@ -42,3 +42,7 @@ Open a terminal window and enter the following
 ```
 git clone https://github.com/AdvosArt/heartcode-training
 ```
+
+## Vercel Deployment
+
+The Vercel project and deployment can be found [here](https://vercel.com/advos-projects/heartcode-training).
