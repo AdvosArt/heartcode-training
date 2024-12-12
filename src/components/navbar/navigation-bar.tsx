@@ -68,9 +68,9 @@ import {
 
 
 const navItems: NavItem[] = [
-	{ navigationLink: "/", navigationDescription: "Project Heartcode" },
-	{ navigationLink: "/quiz", navigationDescription: "Quiz" },
-	{ navigationLink: "/about-me", navigationDescription: "About Me" },
+  { navigationLink: "/", navigationDescription: "Project Heartcode" },
+  { navigationLink: "/quiz", navigationDescription: "Quiz" },
+  { navigationLink: "/about-me", navigationDescription: "About Me" },
   // { navigationLink: "/nugget", navigationDescription: "Nugget" },
 ]
 
@@ -108,9 +108,9 @@ export function NavigationBar() {
     //     <ModeToggle />
     // </NavigationMenu>
 
-    <NavigationMenu className="overflow-x flex flex-row justify-between min-w-full list-none h-[60px] sticky top-0 p-5 backdrop-blur-md border-2">
+    <NavigationMenu className="z-[100] overflow-x flex flex-row justify-between min-w-full list-none h-[60px] sticky top-0 p-5 backdrop-blur-md border-2">
       <div className="flex flex-row justify-start gap-4">
-          {navItems.map((navItem, index) => <NavigationItem key={index} navigationLink={navItem.navigationLink} navigationDescription={navItem.navigationDescription} />)}
+        {navItems.map((navItem, index) => <NavigationItem key={index} navigationLink={navItem.navigationLink} navigationDescription={navItem.navigationDescription} />)}
       </div>
       <div className="flex flex-row justify-end gap-4">
         <ModeToggle />
